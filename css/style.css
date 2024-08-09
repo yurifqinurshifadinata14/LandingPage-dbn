@@ -64,8 +64,17 @@
 
 /*** Button End ***/
 
-
 /*** Topbar Start ***/
+
+.topbar {
+    z-index: 1100; /* Menjaga topbar di atas elemen lainnya, termasuk navbar */
+    position: fixed; /* Membuat topbar tetap di posisi atas saat halaman di-scroll */
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: #343a40; /* Sesuaikan warna background sesuai kebutuhan */
+    padding: 5px 0;
+}
 
 .topbar .top-info {
     letter-spacing: 1px;
@@ -100,15 +109,15 @@
 
 /*** Topbar End ***/
 
-
 /*** Navbar Start ***/
 .navbar {
     position: fixed;
-    top: 0;
+    top: 40px; /* Mengatur navbar tepat di bawah topbar */
     left: 0;
     width: 100%;
-    z-index: 1000; /* Menjaga navbar tetap di atas konten lainnya */
+    z-index: 1000; /* Tetap di atas konten lainnya, tetapi di bawah topbar */
     background-color: var(--bs-primary); /* Pastikan navbar memiliki latar belakang agar teks tetap terlihat jelas */
+    padding: 0 8%; /* Lebarkan navbar agar memiliki lebar 100% */
 }
 
 .navbar .navbar-nav {
@@ -154,9 +163,13 @@
     transition: .5s;
     opacity: 1;
 }
+
 /*** Navbar End ***/
 
-
+/* Body adjustment */
+body {
+    padding-top: 120px; /* Menambahkan padding-top untuk mencegah konten tertutup oleh topbar dan navbar */
+}
 
 /*** Breadcrumb Start ***/
 .breadcrumb .breadcrumb-item {
@@ -338,7 +351,7 @@
     }
     
     .carousel-item img {
-        min-height: 400px;
+        min-height: 600px;
         object-fit: cover;
     }
 
@@ -394,6 +407,7 @@
     margin-left: auto;
     margin-right: auto;
     height: 400px; /* Tentukan tinggi container */
+    padding: 20px;
 }
 
 .promo {
@@ -462,6 +476,48 @@
 
 .availability-check button:hover {
     background-color: #1b2838; /* Warna yang lebih gelap saat hover */
+}
+
+/* Responsif untuk layar dengan lebar maksimum 768px (tablet dan mobile) */
+@media (max-width: 768px) {
+    .container-availability {
+        flex-direction: column;
+        height: auto; /* Tinggi dinamis */
+    }
+
+    .promo, .availability-check {
+        width: 100%;
+        text-align: center;
+        padding: 20px 0;
+    }
+
+    .availability-check form {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .availability-check input[type="text"] {
+        width: 100%;
+        border-radius: 25px 25px 0 0;
+        margin-bottom: 10px;
+    }
+
+    .availability-check button {
+        width: 100%;
+        border-radius: 0 0 25px 25px;
+        margin-left: 0;
+    }
+}
+
+/* Responsif untuk layar dengan lebar maksimum 480px (mobile) */
+@media (max-width: 480px) {
+    .promo h3 {
+        font-size: 24px;
+    }
+
+    .promo p, .availability-check h2 {
+        font-size: 18px;
+    }
 }
 /** Pengecekan End **/
 
