@@ -112,12 +112,12 @@
 /*** Navbar Start ***/
 .navbar {
     position: fixed;
-    top: 40px; /* Mengatur navbar tepat di bawah topbar */
+    top: 40px;
     left: 0;
     width: 100%;
-    z-index: 1000; /* Tetap di atas konten lainnya, tetapi di bawah topbar */
-    background-color: var(--bs-primary); /* Pastikan navbar memiliki latar belakang agar teks tetap terlihat jelas */
-    padding: 0 8%; /* Lebarkan navbar agar memiliki lebar 100% */
+    z-index: 1000;
+    background-color: var(--bs-primary);
+    padding: 0; /* Ubah padding agar lebih kecil */
 }
 
 .navbar .navbar-nav {
@@ -155,21 +155,49 @@
         transition: .5s;
         opacity: 0;
     }
+
+    .navbar .nav-item:hover .dropdown-menu {
+        transform: rotateX(0deg);
+        visibility: visible;
+        transition: .5s;
+        opacity: 1;
+    }
 }
 
-.navbar .nav-item:hover .dropdown-menu {
-    transform: rotateX(0deg);
-    visibility: visible;
-    transition: .5s;
-    opacity: 1;
-}
+/* Responsive */
+@media (max-width: 991px) {
+    .navbar {
+        padding: 0 10px; /* Lebih kecil pada mobile */
+    }
 
+    .navbar .navbar-collapse {
+        background-color: var(--bs-primary);
+        padding: 15px; /* Tambahkan padding agar tidak terlalu rapat */
+    }
+
+    .navbar .navbar-nav {
+        flex-direction: column;
+        width: 100%;
+        align-items: center;
+    }
+
+    .navbar .nav-item {
+        width: 100%;
+        text-align: center;
+    }
+
+    .navbar .dropdown-menu {
+        position: relative;
+        width: 100%;
+        background-color: var(--bs-primary);
+    }
+
+    .navbar .dropdown-toggle::after {
+        margin-left: 0;
+    }
+}
 /*** Navbar End ***/
 
-/* Body adjustment */
-body {
-    padding-top: 120px; /* Menambahkan padding-top untuk mencegah konten tertutup oleh topbar dan navbar */
-}
 
 /*** Breadcrumb Start ***/
 .breadcrumb .breadcrumb-item {
@@ -411,19 +439,31 @@ body {
 }
 
 .promo {
-    width: 50%; /* Lebar diperbesar untuk teks promosi */
-    padding: 20px;
+    width: 50%; /* Lebar gambar dan teks promosi */
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.promo-img {
+    width: 50%; /* Ukuran gambar promo */
+    max-width: 300px; /* Maksimal lebar gambar */
+    height: auto; /* Pertahankan aspek rasio gambar */
+}
+
+.promo-text {
+    width: 50%; /* Lebar teks promosi */
     text-align: left;
 }
 
-.promo h3 {
+.promo-text h3 {
     font-size: 38px; /* Ukuran font lebih besar */
     font-weight: bold;
-    color: #3cc07a; /* Warna emas */
+    color: #3cc07a; /* Warna hijau */
     margin-bottom: 20px;
 }
 
-.promo p {
+.promo-text p {
     font-size: 20px; /* Ukuran font paragraf diperbesar */
     color: #2c3e50;
     line-height: 1.6;
@@ -466,7 +506,7 @@ body {
 .availability-check button {
     padding: 10px 30px;
     font-size: 16px;
-    background-color: #3cc07a; /* Warna tombol lebih gelap */
+    background-color: #3cc07a; /* Warna tombol */
     color: #fff;
     border: none;
     border-radius: 0 25px 25px 0;
@@ -475,7 +515,7 @@ body {
 }
 
 .availability-check button:hover {
-    background-color: #1b2838; /* Warna yang lebih gelap saat hover */
+    background-color: #1b2838; /* Warna tombol saat hover */
 }
 
 /* Responsif untuk layar dengan lebar maksimum 768px (tablet dan mobile) */
@@ -485,41 +525,184 @@ body {
         height: auto; /* Tinggi dinamis */
     }
 
-    .promo, .availability-check {
+    .promo {
         width: 100%;
-        text-align: center;
-        padding: 20px 0;
-    }
-
-    .availability-check form {
         flex-direction: column;
-        align-items: stretch;
+        align-items: center;
+        text-align: center;
     }
 
-    .availability-check input[type="text"] {
+    .promo-img {
+        width: 80%;
+        max-width: 300px;
+        margin-bottom: 20px;
+    }
+
+    .promo-text {
         width: 100%;
-        border-radius: 25px 25px 0 0;
-        margin-bottom: 10px;
     }
 
+    .availability-check {
+        width: 100%;
+        padding: 20px 0;
+        text-align: center;
+    }
+
+    .availability-check input[type="text"],
     .availability-check button {
         width: 100%;
-        border-radius: 0 0 25px 25px;
-        margin-left: 0;
+        margin: 10px 0;
     }
 }
 
 /* Responsif untuk layar dengan lebar maksimum 480px (mobile) */
 @media (max-width: 480px) {
-    .promo h3 {
+    .promo-text h3 {
         font-size: 24px;
     }
 
-    .promo p, .availability-check h2 {
+    .promo-text p, .availability-check h2 {
         font-size: 18px;
     }
 }
+
+/** Button Styling for Mobile **/
+.availability-check button {
+    padding: 10px 20px; /* Padding untuk desktop, disesuaikan jika perlu */
+    font-size: 16px; /* Ukuran font untuk desktop */
+    border-radius: 0 25px 25px 0; /* Sudut melingkar di desktop */
+}
+
+/* Responsif untuk layar dengan lebar maksimum 768px (tablet dan mobile) */
+@media (max-width: 768px) {
+    .availability-check button {
+        padding: 10px; /* Padding yang lebih kecil di tablet */
+        font-size: 14px; /* Ukuran font yang lebih kecil di tablet */
+        border-radius: 0 20px 20px 0; /* Penyesuaian sudut melingkar */
+    }
+}
+
+/* Responsif untuk layar dengan lebar maksimum 480px (mobile) */
+@media (max-width: 480px) {
+    .availability-check button {
+        padding: 12px; /* Padding yang sesuai di mobile */
+        font-size: 14px; /* Ukuran font yang lebih kecil di mobile */
+        border-radius: 0 15px 15px 0; /* Penyesuaian sudut melingkar */
+        width: 100%; /* Button mengambil lebar penuh di mobile */
+    }
+}
+
 /** Pengecekan End **/
+
+
+/*** Custom Performance Start ***/
+.custom-performance-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 1200px;
+    margin: 50px auto;
+    padding: 20px;
+    flex-wrap: wrap; /* For responsiveness */
+}
+
+.custom-performance-content {
+    max-width: 600px;
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.custom-highlight {
+    color: #3cc07a; /* Highlight color */
+}
+
+.custom-description {
+    margin-top: 10px;
+    color: #666;
+}
+
+.custom-features {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 30px;
+    flex-wrap: wrap; /* For responsiveness */
+}
+
+.custom-feature {
+    text-align: center;
+    flex: 1;
+    margin: 10px; /* Adjusted for spacing */
+}
+
+.custom-feature h2 {
+    color: #3cc07a;
+    font-size: 36px;
+    margin-bottom: 10px;
+}
+
+.custom-feature p {
+    color: #333;
+    font-weight: bold;
+}
+
+.custom-check-location {
+    margin-top: 40px;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    text-align: left;
+}
+
+.custom-icon-location {
+    margin-right: 10px;
+}
+
+.custom-input-group {
+    display: flex;
+    margin-top: 10px;
+    flex-direction: column; /* Stack inputs on mobile */
+}
+
+.custom-input-group input {
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.custom-input-group input:last-child {
+    margin-bottom: 0;
+}
+
+.custom-performance-image img {
+    max-width: 500px;
+    width: 100%;
+    height: auto;
+}
+
+/** Responsive adjustments for mobile */
+@media screen and (max-width: 768px) {
+    .custom-performance-container {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .custom-performance-content {
+        max-width: 100%;
+        margin-bottom: 20px;
+    }
+
+    .custom-features {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .custom-performance-image {
+        text-align: center;
+    }
+}
+/*** Custom Performance End ***/
 
 /** Colocation Start **/
 .text-center {
